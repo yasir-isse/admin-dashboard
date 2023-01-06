@@ -6,6 +6,11 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 
+import clientRoutes from "./routes/client";
+import generalRoutes from "./routes/general";
+import managementRoutes from "./routes/management";
+import salesRoutes from "./routes/sales";
+
 /* CONFIGURATION */
 
 dotenv.config();
