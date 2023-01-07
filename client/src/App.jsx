@@ -5,7 +5,8 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { themeSettings } from "./theme.js";
 
-import Dashboard from "./scenes/dashboard/Dashboard";
+import Layout from "./scenes/layout/index";
+import Dashboard from "./scenes/dashboard/index";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
