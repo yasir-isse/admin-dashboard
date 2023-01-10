@@ -22,7 +22,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
   return (
-    <AppBar sx={{ posittion: "static", background: "none", boxShadow: "none" }}>
+    <AppBar sx={{ position: "static", background: "none", boxShadow: "none" }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* LEFT SIDE */}
         <FlexBetween>
