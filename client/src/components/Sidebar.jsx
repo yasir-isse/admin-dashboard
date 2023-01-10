@@ -90,7 +90,7 @@ const Sidebar = ({
         >
           <Box width="100%">
             {/* sidebar container */}
-            <Box m="1.5rem 2rem 2rem 3rem">
+            <Box m="1rem 2rem 1rem 3rem">
               {/* top section - logo & toggle icon */}
               <FlexBetween color={theme.palette.secondary.main}>
                 <Box display="flex" alignItems="center" gap="0.5rem">
@@ -98,11 +98,11 @@ const Sidebar = ({
                     Ajuran
                   </Typography>
                 </Box>
-                {!isNonMobile && (
+                {!isNonMobile ? (
                   <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
                     <ChevronLeft />
                   </IconButton>
-                )}
+                ) : null}
               </FlexBetween>
             </Box>
             {/* main section */}
@@ -136,6 +136,7 @@ const Sidebar = ({
                           active === lcText
                             ? theme.palette.primary[600]
                             : theme.palette.secondary[100],
+                        paddingBlock: "6px",
                       }}
                     >
                       <ListItemIcon
@@ -149,17 +150,15 @@ const Sidebar = ({
                       >
                         {icon}
                       </ListItemIcon>
-                      <ListItemText primary={text}>
-                        {active === lcText && (
-                          <ChevronRightOutlined sx={{ ml: "auto" }} />
-                        )}
-                      </ListItemText>
+                      <ListItemText primary={text} />
+                      {active === lcText && (
+                        <ChevronRightOutlined sx={{ ml: "auto" }} />
+                      )}
                     </ListItemButton>
                   </ListItem>
                 );
               })}
             </List>
-            div
           </Box>
         </Drawer>
       )}
