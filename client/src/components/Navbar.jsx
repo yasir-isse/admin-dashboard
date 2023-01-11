@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import FlexBetween from "../components/FlexBetween.jsx";
 import { setMode } from "../state/features/globalSlice";
@@ -8,6 +8,10 @@ import {
   InputBase,
   Toolbar,
   useTheme,
+  Box,
+  Typography,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import {
   LightModeOutlined,
@@ -15,12 +19,20 @@ import {
   Menu as MenuIcon,
   Search,
   SettingsOutlined,
-  ArrowDropDownCircleOutlined,
+  ArrowDropDownOutlined,
 } from "@mui/icons-material";
+import profile from "../assets/profile.jpeg";
 
-const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
+const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isOpen = Boolean(anchorEl);
+
+  const handleClick = (e) => setAnchorEl(e.currentTarget);
+  const handleClose = () => setAnchorEl(null);
+
   return (
     <AppBar sx={{ position: "static", background: "none", boxShadow: "none" }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -56,6 +68,59 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <IconButton>
             <SettingsOutlined sx={{ fontSize: "25px" }} />
           </IconButton>
+
+          <FlexBetween>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-bewteen",
+                alignItems: "center",
+                textTransform: "non",
+                gap: "1rem",
+              }}
+            >
+              <IconButton>
+                <Box
+                  component="img"
+                  alt="profile"
+                  src={profile}
+                  height="32px"
+                  width="32px"
+                  borderRadius="50%"
+                  sx={{ objectFit: "cover" }}
+                />
+              </IconButton>
+              <Box textAlign="left">
+                <Typography
+                  fontWeight="bold"
+                  fontSize="0.85rem"
+                  sx={{ color: theme.palette.secondary[100] }}
+                >
+                  {user.name}
+                </Typography>
+
+                <Typography
+                  fontSize="0.75rem"
+                  sx={{ color: theme.palette.secondary[200] }}
+                >
+                  {user.occupation}
+                </Typography>
+              </Box>
+              <IconButton onClick={handleClick}>
+                <ArrowDropDownOutlined
+                  sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
+                />
+              </IconButton>
+            </Box>
+            <Menu
+              anchorEl={anchorEl}
+              open={isOpen}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            >
+              <MenuItem onClick={handleClose}>Log Out</MenuItem>
+            </Menu>
+          </FlexBetween>
         </FlexBetween>
       </Toolbar>
     </AppBar>
