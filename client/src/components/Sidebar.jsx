@@ -49,8 +49,10 @@ const navItems = [
   { text: "Admin", icon: <AdminPanelSettingsOutlined /> },
   { text: "Performance", icon: <TrendingUpOutlined /> },
 ];
+import profile from "../assets/profile.jpeg";
 
 const Sidebar = ({
+  user,
   drawerWidth,
   isSidebarOpen,
   setIsSidebarOpen,
@@ -111,7 +113,10 @@ const Sidebar = ({
                 // render section titles
                 if (!icon) {
                   return (
-                    <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
+                    <Typography
+                      key={text}
+                      sx={{ m: "1rem 0 0.8rem 3rem", fontSize: "0.9rem" }}
+                    >
                       {text}
                     </Typography>
                   );
@@ -159,6 +164,48 @@ const Sidebar = ({
                 );
               })}
             </List>
+          </Box>
+
+          <Box position="absolute" bottom="2rem" width="100%">
+            <Divider />
+            <FlexBetween
+              textTransform="non"
+              gap="1rem"
+              m="1.5rem 2rem 0 1.5rem"
+            >
+              <IconButton>
+                <Box
+                  component="img"
+                  alt="profile"
+                  src={profile}
+                  height="40px"
+                  width="40px"
+                  borderRadius="50%"
+                  sx={{ objectFit: "cover" }}
+                />
+              </IconButton>
+              <Box textAlign="left">
+                <Typography
+                  fontWeight="bold"
+                  fontSize="0.9rem"
+                  sx={{ color: theme.palette.secondary[100] }}
+                >
+                  {user.name}
+                </Typography>
+
+                <Typography
+                  fontSize="0.8rem"
+                  sx={{ color: theme.palette.secondary[200] }}
+                >
+                  {user.occupation}
+                </Typography>
+              </Box>
+              <IconButton>
+                <SettingsOutlined
+                  sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
+                />
+              </IconButton>
+            </FlexBetween>
           </Box>
         </Drawer>
       )}
