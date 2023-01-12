@@ -13,7 +13,10 @@ import salesRoutes from "./routes/sales.js";
 
 /* DATA IMPORTS */
 import User from "./models/User.js";
-import { dataUser } from "./data/index.js";
+import Product from "./models/Product.js";
+import ProductStat from "./models/ProductStat.js";
+
+import { dataUser, dataProduct, dataProductStat } from "./data/index.js";
 
 /* CONFIGURATION */
 
@@ -45,6 +48,11 @@ mongoose
   .then(() => {
     app.listen(PORT, () => console.log(`Server running on: ${PORT}...`));
     /* ONLY ADD DATA TO DB ONCE */
-    // User.insertMany(dataUser);
+
+    /*
+    User.insertMany(dataUser);
+    Product.insertMany(dataProduct);
+    ProductStat.insertMany(dataProductStat); 
+    */
   })
   .catch((error) => console.error(`Connection Failed!\n${error}`));
