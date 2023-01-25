@@ -15,8 +15,14 @@ import salesRoutes from "./routes/sales.js";
 import User from "./models/User.js";
 import Product from "./models/Product.js";
 import ProductStat from "./models/ProductStat.js";
+import Transaction from "./models/Transaction.js";
 
-import { dataUser, dataProduct, dataProductStat } from "./data/index.js";
+import {
+  dataUser,
+  dataProduct,
+  dataProductStat,
+  dataTransaction,
+} from "./data/index.js";
 
 /* CONFIGURATION */
 
@@ -53,6 +59,7 @@ mongoose
     User.insertMany(dataUser);
     Product.insertMany(dataProduct);
     ProductStat.insertMany(dataProductStat); 
+    Transaction.insertMany(dataTransaction);
     */
   })
   .catch((error) => console.error(`Connection Failed!\n${error}`));
