@@ -3,6 +3,9 @@ import ProductStat from "../models/ProductStat.js";
 import User from "../models/User.js";
 import Transaction from "../models/Transaction.js";
 
+import getCountryIso3 from "country-iso-2-to-3";
+
+//Products Controller
 export const getProducts = async (req, res) => {
   try {
     const products = await Product.find();
@@ -19,6 +22,7 @@ export const getProducts = async (req, res) => {
   }
 };
 
+// Customers Controller
 export const getCustomers = async (req, res) => {
   try {
     const customers = await User.find({ role: "user" }).select("-password");
@@ -28,6 +32,7 @@ export const getCustomers = async (req, res) => {
   }
 };
 
+//Transactions Controller
 export const getTransactions = async (req, res) => {
   try {
     // info from client: {field:'', sort:'asc || desc'}
@@ -62,6 +67,37 @@ export const getTransactions = async (req, res) => {
     });
 
     res.status(200).json({ transactions, numOfTransactions });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+//Geography Controller
+
+export const getGeography = async (req, res) => {
+  try {
+    const users = await User.find();
+
+    //convert 2 letter country to 3 letters & assign value
+    const mappedLocations = users.reduce((acc, { country }) => {
+      //convert from 2 to 3 letter country name
+      const countryISO3 = getCountryIso3(country);
+      //if country doesnt exsist, create one
+      if (!acc[countryISO3]) {
+        acc[countryISO3] = 0;
+      }
+      //increase num of users in the country
+      acc[countryISO3]++;
+
+      //return list of countries with num of users {country:numOfUsers}
+      return acc;
+    }, {});
+
+    //convert mappedLocations into nivo-chart format {id:country,value:numOfUsers}
+    const formattedLocations = Object.entries(mappedLocations).map(
+      ([country, count]) => ({ id: country, value: count })
+    );
+    return res.status(200).json(formattedLocations);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
