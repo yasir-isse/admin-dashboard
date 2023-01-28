@@ -4,7 +4,14 @@ export const apiSlice = createApi({
   reducerPath: "adminApi",
   // api call to the backend server
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5001" }),
-  tagTypes: ["User", "Products", "Customers", "Transactions", "Geography"],
+  tagTypes: [
+    "User",
+    "Products",
+    "Customers",
+    "Transactions",
+    "Geography",
+    "Sales",
+  ],
   endpoints: (build) => ({
     getUser: build.query({
       query: (id) => `general/user/${id}`,
@@ -30,6 +37,10 @@ export const apiSlice = createApi({
       query: () => "client/geography",
       providesTags: ["Geography"],
     }),
+    getSales: build.query({
+      query: () => "sales/overview",
+      providesTags: ["Sales"],
+    }),
   }),
 });
 
@@ -39,4 +50,5 @@ export const {
   useGetCustomersQuery,
   useGetTransactionsQuery,
   useGetGeographyQuery,
+  useGetSalesQuery,
 } = apiSlice;
