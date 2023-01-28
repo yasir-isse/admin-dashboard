@@ -6,6 +6,8 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useGetCustomersQuery } from "../../state/features/api";
 import Header from "../../components/Header";
 import columns from "./columnsData";
+import CustomColumnMenu from "../../components/DataGridCustomColumnMenu";
+
 const Customers = () => {
   const theme = useTheme();
   const { data, isLoading } = useGetCustomersQuery();
@@ -42,6 +44,7 @@ const Customers = () => {
           rows={data || []}
           getRowId={(row) => row._id}
           columns={columns}
+          components={{ ColumnMenu: CustomColumnMenu }}
         />
       </Box>
     </Box>
