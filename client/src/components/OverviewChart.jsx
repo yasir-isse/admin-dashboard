@@ -86,7 +86,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
         reverse: false,
       }}
       yFormat=" >-.2f"
-      curve="catmullRom"
+      curve="linear"
       axisTop={null}
       axisRight={null}
       axisBottom={{
