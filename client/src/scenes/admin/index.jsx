@@ -11,7 +11,6 @@ import CustomColumnMenu from "../../components/DataGridCustomColumnMenu";
 const Admin = () => {
   const theme = useTheme();
   const { data, isLoading } = useGetAdminsQuery();
-  console.log(data);
   return (
     <Box m="1.5rem 2.5rem">
       <Header title="ADMINS" subtitle="Managing Admins and List of Admins" />
